@@ -1,0 +1,178 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools_scm>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bert-han-plus-plus"
+dynamic = ["version"]
+description = "A Cross-Lingual Hierarchical Transformer with Adaptive Complexity and SHAP-Attention Fusion"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "Your Name", email = "your.email@domain.com"},
+]
+maintainers = [
+    {name = "Your Name", email = "your.email@domain.com"},
+]
+keywords = ["bert", "attention", "transformer", "nlp", "text-classification", "interpretability", "quantization"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "torch>=2.0.0",
+    "transformers>=4.30.0",
+    "datasets>=2.14.0",
+    "numpy>=1.24.0",
+    "scikit-learn>=1.3.0",
+    "shap>=0.42.0",
+    "matplotlib>=3.7.0",
+    "seaborn>=0.12.0",
+    "tqdm>=4.65.0",
+    "pyyaml>=6.0",
+    "pandas>=2.0.0",
+    "tokenizers>=0.13.0",
+    "scipy>=1.11.0",
+    "tensorboard>=2.13.0",
+    "wandb>=0.15.0",
+    "accelerate>=0.21.0",
+    "evaluate>=0.4.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "black>=23.7.0",
+    "flake8>=6.0.0",
+    "isort>=5.12.0",
+    "mypy>=1.5.0",
+    "pre-commit>=3.3.0",
+    "sphinx>=7.1.0",
+    "sphinx-rtd-theme>=1.3.0",
+]
+quantization = [
+    "onnx>=1.14.0",
+    "onnxruntime>=1.15.0",
+    "openvino>=2023.0.0",
+    "tensorrt>=8.6.0",
+]
+multilingual = [
+    "sentencepiece>=0.1.99",
+    "fasttext>=0.9.2",
+    "polyglot>=16.7.4",
+    "langdetect>=1.0.9",
+]
+edge = [
+    "onnx>=1.14.0",
+    "onnxruntime>=1.15.0",
+    "nvidia-tensorrt>=8.6.0",
+    "pycuda>=2022.2",
+]
+all = [
+    "bert-han-plus-plus[dev,quantization,multilingual,edge]",
+]
+
+[project.urls]
+Homepage = "https://github.com/your-username/bert-han-plus-plus"
+Documentation = "https://bert-han-plus-plus.readthedocs.io"
+Repository = "https://github.com/your-username/bert-han-plus-plus"
+"Bug Tracker" = "https://github.com/your-username/bert-han-plus-plus/issues"
+Changelog = "https://github.com/your-username/bert-han-plus-plus/blob/main/CHANGELOG.md"
+
+[project.scripts]
+bert-han-train = "bert_han_plus_plus.cli:train"
+bert-han-evaluate = "bert_han_plus_plus.cli:evaluate"
+bert-han-quantize = "bert_han_plus_plus.cli:quantize"
+bert-han-distill = "bert_han_plus_plus.cli:distill"
+
+[tool.setuptools]
+packages = ["bert_han_plus_plus"]
+
+[tool.setuptools.dynamic]
+version = {attr = "bert_han_plus_plus.__version__"}
+
+[tool.setuptools.package-data]
+bert_han_plus_plus = ["*.yaml", "*.json", "configs/*.yaml"]
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+line_length = 88
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "--cov=bert_han_plus_plus --cov-report=html --cov-report=term-missing"
+
+[tool.coverage.run]
+source = ["bert_han_plus_plus"]
+omit = [
+    "*/tests/*",
+    "*/test_*",
+    "setup.py",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+]
+
+[tool.flake8]
+max-line-length = 88
+extend-ignore = ["E203", "W503"]
+exclude = [
+    ".git",
+    "__pycache__",
+    "build",
+    "dist",
+    "*.egg-info",
+    ".venv",
+    ".tox",
+]
