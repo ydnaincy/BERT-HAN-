@@ -56,21 +56,6 @@ Cross‑Lingual KD (mBERT)                                        │
                      Attn‑SHAP Fusion  ──▶ INT8 Quantised Head ──▶ Output
 ```
 
----
-
-## 📂 Repository Layout
-
-```bash
-.
-├── models/                  # PyTorch / HF model definitions (BERT‑HAN++)
-├── data/                    # Scripts + links for all datasets
-├── notebooks/               # End‑to‑end Colab & Jupyter demos
-├── utils/                   # Helper utilities (logging, SHAP wrappers)
-├── results/                 # Saved weights, logs, figures & tables
-├── requirements.txt         # Python deps (PyTorch >=1.13, transformers >=4.40)
-├── README.md                # ✨ You are here
-└── bert_han_paper.pdf       # Camera‑ready ICACCIS‑2025 paper (optional)
-```
 
 ---
 
